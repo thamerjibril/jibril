@@ -1,0 +1,32 @@
+{
+  "name": "jibril",
+  "version": "1.0.0",
+  "description": "Performance-optimized web application",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "analyze": "vite-bundle-visualizer",
+    "lighthouse": "lighthouse http://localhost:5173 --view",
+    "build:analyze": "npm run build && npm run analyze"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "web-vitals": "^3.5.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.0.8",
+    "vite-bundle-visualizer": "^0.11.0",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-pwa": "^0.17.4",
+    "rollup-plugin-visualizer": "^5.11.0",
+    "terser": "^5.26.0",
+    "lighthouse": "^11.4.0",
+    "workbox-window": "^7.0.0"
+  }
+}
