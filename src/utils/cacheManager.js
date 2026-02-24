@@ -1,5 +1,15 @@
 // Cache management utilities
 
+// Safely parse a JSON string, returning `fallback` instead of throwing on invalid input
+export const safeJsonParse = (str, fallback = null) => {
+  if (str === null || str === undefined || typeof str !== 'string') return fallback;
+  try {
+    return JSON.parse(str);
+  } catch {
+    return fallback;
+  }
+};
+
 const CACHE_VERSION = 'v1';
 const CACHE_NAME = `jibril-cache-${CACHE_VERSION}`;
 
@@ -164,7 +174,7 @@ class MemoryCache {
     }
     
     this.cache.set(key, {
-      value,
+      value: JSON.stringify(value),
       expires: Date.now() + this.ttl
     });
   }
@@ -179,7 +189,7 @@ class MemoryCache {
       return null;
     }
     
-    return item.value;
+    return safeJsonParse(item.value);
   }
   
   clear() {
