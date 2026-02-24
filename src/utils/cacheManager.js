@@ -85,7 +85,7 @@ export const fetchWithCache = async (url, options = {}) => {
         throw error;
       }
       
-    case CacheStrategy.CACHE_FIRST:
+    case CacheStrategy.CACHE_FIRST: {
       const cachedResponse = await getCachedResponse(url);
       if (cachedResponse) return cachedResponse;
       
@@ -94,8 +94,9 @@ export const fetchWithCache = async (url, options = {}) => {
         await cacheApiResponse(url, response, ttl);
       }
       return response;
+    }
       
-    case CacheStrategy.STALE_WHILE_REVALIDATE:
+    case CacheStrategy.STALE_WHILE_REVALIDATE: {
       const cached = await getCachedResponse(url);
       const fetchPromise = fetch(url, fetchOptions).then(res => {
         if (res.ok) {
@@ -105,16 +106,18 @@ export const fetchWithCache = async (url, options = {}) => {
       });
       
       return cached || fetchPromise;
+    }
       
     case CacheStrategy.NETWORK_ONLY:
       return fetch(url, fetchOptions);
       
-    case CacheStrategy.CACHE_ONLY:
+    case CacheStrategy.CACHE_ONLY: {
       const cacheOnly = await getCachedResponse(url);
       if (!cacheOnly) {
         throw new Error('No cached response available');
       }
       return cacheOnly;
+    }
       
     default:
       return fetch(url, fetchOptions);
