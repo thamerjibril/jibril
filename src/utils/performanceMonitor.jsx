@@ -1,4 +1,5 @@
 // Performance monitoring utilities
+import React from 'react';
 
 class PerformanceMonitor {
   constructor() {
@@ -243,7 +244,7 @@ export const withPerformanceTracking = (Component, componentName) => {
     React.useEffect(() => {
       const renderTime = performance.now() - startTime;
       performanceMonitor.trackComponentRender(componentName, renderTime);
-    });
+    }, []);
     
     return <Component {...props} />;
   };
