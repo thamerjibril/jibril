@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "analyze": "vite-bundle-visualizer",
     "lighthouse": "lighthouse http://localhost:5173 --view",
-    "build:analyze": "npm run build && npm run analyze"
+    "build:analyze": "npm run build && npm run analyze",
+    "validate:json": "node -e \"const fs=require('fs');const path=require('path');const files=fs.readdirSync('.').filter(f=>f.endsWith('.json')&&f!=='package-lock.json');files.forEach(f=>{try{JSON.parse(fs.readFileSync(f,'utf8'));console.log(f+': valid')}catch(e){console.error(f+': INVALID - '+e.message);process.exit(1)}})\""
   },
   "dependencies": {
     "react": "^18.2.0",
